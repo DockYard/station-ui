@@ -9,14 +9,14 @@ defmodule StationUI.HTML.Accordion do
 
   ## Example
 
-  <.accordion_set>
+  <.accordion>
     <:header>
       Title something 1
     </:header>
     <:content>
       Content something 1
     </:content>
-  </.accordion_set>
+  </.accordion>
 
   Suggested size classes
 
@@ -37,20 +37,6 @@ defmodule StationUI.HTML.Accordion do
   lg: "md:text-lg lg:text-xl"
   xl: "md:text-lg lg:text-xl xl:text-2xl"
   """
-
-  def accordion(assigns) do
-    ~H"""
-    <.accordion_set>
-      <:header>
-        Title something 1
-      </:header>
-      <:content>
-        Content something 1
-      </:content>
-    </.accordion_set>
-    """
-  end
-
   slot :header, required: true do
     attr :button_id, :string
   end
@@ -60,7 +46,7 @@ defmodule StationUI.HTML.Accordion do
   attr :content_size_class, :string, default: "text-base md:text-lg"
   attr :rest, :global
 
-  def accordion_set(assigns) do
+  def accordion(assigns) do
     assigns =
       assigns
       |> assign(:header, List.wrap(assigns.header))
