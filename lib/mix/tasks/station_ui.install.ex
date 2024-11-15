@@ -191,7 +191,7 @@ defmodule Mix.Tasks.StationUi.Install do
       String.replace(tailwind_content, module_exports_line, module_exports_line <> sui_preset)
 
     File.write!(tailwind_config_path, tailwind_content)
-    IO.puts("Updated #{tailwind_config_path}")
+    Mix.shell().info("Updated #{tailwind_config_path}")
 
     app_css_path = Path.join(context.web_assets_path, "css/app.css")
     app_css_content = File.read!(app_css_path)
@@ -201,7 +201,7 @@ defmodule Mix.Tasks.StationUi.Install do
       ~s|@import "./station-ui.css";\n@import "./station-ui-fonts.css";\n| <> app_css_content
     )
 
-    IO.puts("Updated #{app_css_path}")
+    Mix.shell().info("Updated #{app_css_path}")
 
     web_app_ex_path = PathContext.web_app_ex_path(context)
     web_app_ex_content = File.read!(web_app_ex_path)
@@ -215,7 +215,7 @@ defmodule Mix.Tasks.StationUi.Install do
       )
 
     File.write!(web_app_ex_path, web_app_ex_content)
-    IO.puts("Updated #{web_app_ex_path}")
+    Mix.shell().info("Updated #{web_app_ex_path}")
 
     if Mix.shell().yes?(
          "StationUI is designed to replace the default Phoenix CoreComponents. Ok to clear out the existing CoreComponents file? Unless you made custom changes to this file that you still want, this should be fine to do."
@@ -230,7 +230,7 @@ defmodule Mix.Tasks.StationUi.Install do
         Enum.join([first, "  # Replaced by StationUI components, do not remove or phoenix generators will recreate the full file", last], "\n")
       )
 
-      IO.puts("Replaced #{core_components_path}")
+      Mix.shell().info("Replaced #{core_components_path}")
     end
   end
 end
