@@ -231,6 +231,8 @@ defmodule Mix.Tasks.StationUi.Install do
       )
 
       Mix.shell().info("Replaced #{core_components_path}")
+    else
+      Mix.shell().info("Skipping replacing CoreComponents")
     end
   end
 end
