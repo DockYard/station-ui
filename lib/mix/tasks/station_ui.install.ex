@@ -6,7 +6,7 @@ defmodule Mix.Tasks.StationUi.Install do
 
     @assets_subpath "assets"
 
-    @station_ui_subpath "station_ui"
+    @station_ui_subpath "components/station_ui"
 
     @sources_root_path __DIR__ |> Path.join("../../../sources") |> Path.expand()
 
@@ -131,7 +131,7 @@ defmodule Mix.Tasks.StationUi.Install do
     end
 
     defp template_source_destination_file_path(context, source_file_path) do
-      installer_lib = Path.join(@sources_root_path, "lib/station_ui")
+      installer_lib = Path.join(@sources_root_path, "lib/components/station_ui")
       relative_source_path = Path.relative_to(source_file_path, installer_lib)
 
       Path.join([context.web_path, @station_ui_subpath, relative_source_path])
@@ -205,27 +205,32 @@ defmodule Mix.Tasks.StationUi.Install do
 
     web_app_ex_path = PathContext.web_app_ex_path(context)
     web_app_ex_content = File.read!(web_app_ex_path)
+    core_components_import = "import #{context.web_app_name}.CoreComponents"
 
     web_app_ex_content =
       String.replace(
         web_app_ex_content,
-        "import #{context.web_app_name}.CoreComponents",
-        "use #{context.web_app_name}.StationUI.HTML"
+        core_components_import,
+        "# #{core_components_import}\n      use #{context.web_app_name}.StationUI.HTML"
       )
 
     File.write!(web_app_ex_path, web_app_ex_content)
     IO.puts("Updated #{web_app_ex_path}")
 
-    core_components_path = Path.join(context.web_path, "components/core_components.ex")
-    [first | rest] = File.read!(core_components_path) |> String.trim() |> String.split("\n")
-    last = List.last(rest)
-    File.rm!(core_components_path)
+    if Mix.shell().yes?(
+         "StationUI is designed to replace the default Phoenix CoreComponents. Ok to clear out the existing CoreComponents file? Unless you made custom changes to this file that you still want, this should be fine to do."
+       ) do
+      core_components_path = Path.join(context.web_path, "components/core_components.ex")
+      [first | rest] = File.read!(core_components_path) |> String.trim() |> String.split("\n")
+      last = List.last(rest)
+      File.rm!(core_components_path)
 
-    File.write(
-      core_components_path,
-      Enum.join([first, "  # Replaced by StationUI components", last], "\n")
-    )
+      File.write(
+        core_components_path,
+        Enum.join([first, "  # Replaced by StationUI components, do not remove or phoenix generators will recreate the full file", last], "\n")
+      )
 
-    IO.puts("Replaced #{core_components_path}")
+      IO.puts("Replaced #{core_components_path}")
+    end
   end
 end
