@@ -50,7 +50,7 @@ defmodule StationUI.HTML.Footer do
           </:footer_link>
         </.column_items>
       </:column>
-    <./footer>
+    </.footer>
 
   ## Both variants accept social links and icons
     <.footer>
