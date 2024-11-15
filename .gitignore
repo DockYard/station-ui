@@ -25,8 +25,6 @@ station_ui-*.tar
 # Temporary files, for example, from tests.
 /tmp/
 
-node_modules/
-priv/static/assets/
 .vscode/
 
 .elixir_ls/

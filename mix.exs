@@ -9,7 +9,6 @@ defmodule StationUI.MixProject do
       elixirc_paths: elixirc_paths(Mix.env(), Application.get_env(:station_ui, :use_source_components, false)),
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      aliases: aliases(),
       description: "StationUI",
       package: [
         organization: "dockyard",
@@ -18,7 +17,7 @@ defmodule StationUI.MixProject do
         ],
         licenses: ["MIT"],
         links: %{"GitHub" => "https://github.com/DockYard/station-ui"},
-        files: ~w(lib templates css fonts js mix.exs README.md)
+        files: ~w(lib sources mix.exs LICENSE.md README.md)
       ]
     ]
   end
@@ -43,15 +42,5 @@ defmodule StationUI.MixProject do
       {:credo, "~> 1.7.0", only: [:dev, :test], runtime: false},
       {:tailwind_formatter, "~> 0.3.5", only: [:dev, :test], runtime: false}
     ]
-  end
-
-  defp aliases do
-    [
-      "phx.server": &phx_server/1
-    ]
-  end
-
-  defp phx_server(_) do
-    IO.puts("Running in wrong directory. cd into demo_web")
   end
 end

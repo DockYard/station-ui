@@ -9,17 +9,4 @@ In addition to these benefits, Station UI also replaces Phoenix Core Components.
 ### From Repo
 
 1. Add `{:station_ui, github: "dockyard/station-ui"}` to your deps in `mix.exs`
-1. Inside your project root, run `mix station_ui.install`. Note the project must be running the same version of Elixir as the one you ran `mix archive.install` with
-
-## Local Development
-
-For detailed instructions on setting up and making changes in your development environment, see: [Demo App](demo_app/README.md).
-
-To run the application locally, navigate to the `/demo_app` folder:
-
-```
-cd demo_app/
-iex -S mix phx.server
-```
-
-Once running, open [http://localhost:4000/](http://localhost:4000/) in a browser to view.
+1. Inside your project root, run `mix station_ui.install`.

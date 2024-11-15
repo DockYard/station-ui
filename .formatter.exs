@@ -4,9 +4,7 @@
   plugins: [TailwindFormatter, Phoenix.LiveView.HTMLFormatter],
   inputs: [
     "{mix,.formatter}.exs",
-    "{config,lib,test}/**/*.{ex,exs}",
-    "demo_app/{config,lib,test}/**/*.{ex,exs}",
-    "installer/{config,lib,test}/**/*.{ex,exs}"
+    "{lib,sources,test}/**/*.{ex,exs}"
   ],
   line_length: 150
 ]
