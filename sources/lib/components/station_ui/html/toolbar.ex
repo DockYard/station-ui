@@ -1,8 +1,8 @@
-defmodule StationUI.HTML.Toolbars do
+defmodule StationUI.HTML.Toolbar do
   use Phoenix.Component
 
-  import StationUI.HTML.Icons, only: [icon: 1]
-  import StationUI.HTML.Buttons
+  import StationUI.HTML.Icon, only: [icon: 1]
+  import StationUI.HTML.Button
 
   @doc """
   Sets up Toolbar component.  The Toolbar includes default and vertical variants

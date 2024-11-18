@@ -1,7 +1,7 @@
-defmodule StationUI.HTML.Tooltips do
+defmodule StationUI.HTML.Tooltip do
   use Phoenix.Component
 
-  import StationUI.HTML.Icons
+  import StationUI.HTML.Icon
 
   @doc """
   The tooltip component renders a small unit of informational content that is hidden until a user hovers over the activating content.

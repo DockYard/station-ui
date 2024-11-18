@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.Spinners do
+defmodule StationUI.HTML.Spinner do
   use Phoenix.Component
 
   @doc """

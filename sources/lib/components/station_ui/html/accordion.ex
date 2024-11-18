@@ -1,7 +1,7 @@
 defmodule StationUI.HTML.Accordion do
   use Phoenix.Component
 
-  import StationUI.HTML.Icons, only: [icon: 1]
+  import StationUI.HTML.Icon, only: [icon: 1]
   alias Phoenix.LiveView.JS
 
   @moduledoc """

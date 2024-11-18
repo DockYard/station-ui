@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.Buttons do
+defmodule StationUI.HTML.Button do
   use Phoenix.Component
 
   @moduledoc """

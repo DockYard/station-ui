@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.Cards do
+defmodule StationUI.HTML.Card do
   use Phoenix.Component
 
   @moduledoc """

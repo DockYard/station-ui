@@ -1,10 +1,10 @@
-defmodule StationUI.HTML.Forms do
+defmodule StationUI.HTML.Form do
   @moduledoc """
   This module exists to provide the same API as the Phoenix Core Components so as to support
   generators that target the Core Components (`mix phx.gen.live`, `mix phx.gen.auth`, etc...)
   """
   use Phoenix.Component
-  alias StationUI.HTML.Inputs
+  alias StationUI.HTML.Input
 
   attr :id, :any, default: nil
   attr :name, :any
@@ -40,33 +40,33 @@ defmodule StationUI.HTML.Forms do
 
   def input(%{type: "checkbox"} = assigns) do
     ~H"""
-    <Inputs.checkbox {Map.drop(assigns, [:field, :label, :multiple, :options, :prompt, :type])}>
+    <Input.checkbox {Map.drop(assigns, [:field, :label, :multiple, :options, :prompt, :type])}>
       <:label :if={@label}><%= @label %></:label>
-    </Inputs.checkbox>
+    </Input.checkbox>
     """
   end
 
   def input(%{type: "select"} = assigns) do
     ~H"""
-    <Inputs.simple_select {Map.drop(assigns, [:checked, :field, :label, :type])}>
+    <Input.simple_select {Map.drop(assigns, [:checked, :field, :label, :type])}>
       <:label :if={@label}><%= @label %></:label>
-    </Inputs.simple_select>
+    </Input.simple_select>
     """
   end
 
   def input(%{type: "textarea"} = assigns) do
     ~H"""
-    <Inputs.textarea {Map.drop(assigns, [:checked, :field, :label, :multiple, :options, :prompt, :type])}>
+    <Input.textarea {Map.drop(assigns, [:checked, :field, :label, :multiple, :options, :prompt, :type])}>
       <:label :if={@label}><%= @label %></:label>
-    </Inputs.textarea>
+    </Input.textarea>
     """
   end
 
   def input(assigns) do
     ~H"""
-    <Inputs.generic_input {Map.drop(assigns, [:checked, :field, :label, :multiple, :options, :prompt])}>
+    <Input.generic_input {Map.drop(assigns, [:checked, :field, :label, :multiple, :options, :prompt])}>
       <:label :if={@label}><%= @label %></:label>
-    </Inputs.generic_input>
+    </Input.generic_input>
     """
   end
 

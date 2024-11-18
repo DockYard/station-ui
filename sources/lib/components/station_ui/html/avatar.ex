@@ -1,7 +1,7 @@
-defmodule StationUI.HTML.Avatars do
+defmodule StationUI.HTML.Avatar do
   use Phoenix.Component
 
-  import StationUI.HTML.StatusBadges, only: [status_badge: 1]
+  import StationUI.HTML.StatusBadge, only: [status_badge: 1]
 
   @moduledoc """
   The avatar component renders initials, an SVG, or an image thumbnail to represent a user.

@@ -1,8 +1,8 @@
-defmodule StationUI.HTML.Banners do
+defmodule StationUI.HTML.Banner do
   use Phoenix.Component
 
-  import StationUI.HTML.Icons, only: [icon: 1]
-  import StationUI.HTML.Buttons
+  import StationUI.HTML.Icon, only: [icon: 1]
+  import StationUI.HTML.Button
 
   alias Phoenix.LiveView.JS
 

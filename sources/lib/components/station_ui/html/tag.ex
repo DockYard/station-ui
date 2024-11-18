@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.Tags do
+defmodule StationUI.HTML.Tag do
   @moduledoc """
 
   For bordered tags, add "border-2"
@@ -7,7 +7,7 @@ defmodule StationUI.HTML.Tags do
   """
   use Phoenix.Component
 
-  import StationUI.HTML.Icons, only: [icon: 1]
+  import StationUI.HTML.Icon, only: [icon: 1]
 
   alias Phoenix.LiveView.JS
 

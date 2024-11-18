@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.NotificationBadges do
+defmodule StationUI.HTML.NotificationBadge do
   use Phoenix.Component
 
   attr :class, :any, default: "h-6 w-6 text-sm"

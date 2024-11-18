@@ -1,8 +1,8 @@
-defmodule StationUI.HTML.Modals do
+defmodule StationUI.HTML.Modal do
   use Phoenix.Component
 
-  import StationUI.HTML.Buttons
-  import StationUI.HTML.Icons, only: [icon: 1]
+  import StationUI.HTML.Button
+  import StationUI.HTML.Icon, only: [icon: 1]
 
   alias Phoenix.LiveView.JS
 

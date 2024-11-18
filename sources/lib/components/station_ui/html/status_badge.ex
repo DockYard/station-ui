@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.StatusBadges do
+defmodule StationUI.HTML.StatusBadge do
   use Phoenix.Component
 
   @status_badge_base_classes "aspect-square flex items-center justify-center rounded-full"

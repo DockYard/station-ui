@@ -1,4 +1,4 @@
-defmodule StationUI.HTML.Icons do
+defmodule StationUI.HTML.Icon do
   use Phoenix.Component
 
   @doc """
