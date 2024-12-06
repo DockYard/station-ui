@@ -2,11 +2,12 @@ defmodule StationUI.HTML.Spinner do
   use Phoenix.Component
 
   @moduledoc """
-  The spinner component renders an animated looping SVG to represent a loading state.
+  The spinner component offers two options (spinner and spinner_double) to render
+  an animated looping SVG to represent a loading state.
   Spinners are used to notify users when something is in progress or fetching data.
   When a page or element is updating, the loading animation appears and then resolves once that
   action is complete.
-  Each spinner type has a default size but this can be overridden.
+  Each spinner option has a default size but this can be overridden.
 
   ## Spinner:
 
