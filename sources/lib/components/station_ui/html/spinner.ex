@@ -19,27 +19,43 @@ defmodule StationUI.HTML.Spinner do
   Spinner options:
 
   -- class: Add classes to spinner component in addition to the base defined classes.
-            default: "h-6 w-6" (overridden when specifying a class)
+            default/medium size: "h-6 w-6" (overridden when specifying a class)
 
   ### Spinner Example
 
   <.spinner class="h-11 w-11" />
 
+  Suggested size classes:
+
+  xl: "h-11 w-11"
+  lg: "h-8 w-8"
+  sm: "h-5 w-5"
+  xs: "h-4 w-4"
+
+
   ## Double Spinner:
 
   The Double Spinner is used primarily when a page needs to load before displaying new content.
+  It is by default larger than the Spinner and has two rings instead of one.
 
   This <span> element is not visible on screen but will still be announced by screen readers to notify
   Assistive Technology users of the loading status.
 
   Double spinner options:
 
-    -- class: Add classes to spinner component in addition to the base defined classes.
-              default: h-[114px] w-[114px] (overridden when specifying a class)
+  -- class: Add classes to double spinner component in addition to the base defined classes.
+            default/medium size: h-[114px] w-[114px] (overridden when specifying a class)
 
   ### Double Spinner Example
 
   <.spinner_double class="h-16 w-16" />
+
+  Suggested size classes:
+
+  xl: "h-[244px] w-[244px]"
+  lg: "h-[184px] w-[184px]"
+  sm: "h-[84px] w-[84px]"
+  xs: "h-16 w-16"
 
   """
 
