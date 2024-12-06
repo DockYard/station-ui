@@ -4,7 +4,13 @@ defmodule StationUI.HTML.Accordion do
   import StationUI.HTML.Icon, only: [icon: 1]
   alias Phoenix.LiveView.JS
 
-  @moduledoc """
+  @header_default_classes "text-base sm:text-lg md:text-xl"
+  defp header_default_classes, do: @header_default_classes
+
+  @content_default_classes "text-base md:text-lg"
+  defp content_default_classes, do: @content_default_classes
+
+  @doc """
   The accordion component renders a list of items with child content that can be expanded or collapsed.
 
   ## Example
@@ -18,70 +24,74 @@ defmodule StationUI.HTML.Accordion do
     </:content>
   </.accordion>
 
-  Suggested size classes
-
-  The Default size for accordions is "md" but the size can be change by passing in these additional classes
-  using `header_size_class="..."` and `content_size_class="..."` as follows
-
-  header_size_class:
+  Suggested size classes for `header` (default: md):
 
   sm: "p-1 text-base sm:text-lg gap-x-0.5"
   md: "p-1 text-base sm:text-lg md:text-xl md:py-1 md:pr-1 md:pl-1.5 md:gap-x-1"
   lg: "p-1 text-base sm:text-lg md:text-xl lg:text-2xl md:py-1 md:pr-1 md:pl-1.5 lg:pl-2 md:gap-x-1 lg:gap-x-1.5"
   xl: "p-1 text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl md:pt-1 md:pb-0 md:pr-1 md:pl-1.5 lg:pl-4 sm:gap-x-3 md:gap-x-4 lg:gap-x-5"
 
-  content_size_class:
+  Suggested size classes for `content` (default: md):
 
   sm: "text-base"
   md: "grid transition-grid-rows text-base md:text-lg"
   lg: "md:text-lg lg:text-xl"
   xl: "md:text-lg lg:text-xl xl:text-2xl"
   """
+
+  attr :id, :string
+  attr :rest, :global
+
   slot :header, required: true do
     attr :button_id, :string
+    attr :class, :string, doc: @header_default_classes
   end
 
-  slot :content, required: true
-  attr :header_size_class, :string, default: "text-base sm:text-lg md:text-xl"
-  attr :content_size_class, :string, default: "text-base md:text-lg"
-  attr :rest, :global
+  slot :content, required: true do
+    attr :class, :string, doc: @content_default_classes
+  end
 
   def accordion(assigns) do
     assigns =
       assigns
-      |> assign(:header, List.wrap(assigns.header))
-      |> assign(:content, List.wrap(assigns.content))
-      |> assign(:random_id, :rand.uniform(9999))
-      |> assign(:items, Enum.with_index(Enum.zip(List.wrap(assigns.header), List.wrap(assigns.content))))
+      |> assign_new(:id, fn -> :rand.uniform(9999) end)
+      |> assign(:items, assigns.header |> Enum.zip(assigns.content) |> Enum.with_index())
 
     ~H"""
-    <div class="grid gap-2">
+    <div class="grid gap-2" id={"accordion-#{@id}"}>
       <div :for={{{header, content}, index} <- @items} class="relative grid gap-1">
         <% # Accordion Trigger %>
         <button
-          id={Map.get(header, :button_id)}
+          id={header[:button_id]}
           class={[
             "group flex w-full min-w-min cursor-pointer items-center whitespace-nowrap bg-transparent font-semibold outline-none transition hover:bg-slate-50 focus-visible:ring-4 focus-visible:ring-purple-600 focus-visible:rounded-lg active:bg-slate-50 disabled:bg-slate-50 disabled:text-slate-300",
             "pl-3 pr-2 py-1 gap-x-2 md:pl-4 md:pr-3 md:gap-x-4",
-            @header_size_class
+            header[:class] || header_default_classes()
           ]}
           type="button"
-          id={"accordion-trigger-#{@random_id}-#{index}"}
-          aria-controls={"accordion-#{@random_id}-#{index}"}
+          id={"accordion-trigger-#{@id}-#{index}"}
+          aria-controls={"accordion-#{@id}-#{index}"}
           aria-expanded="false"
           phx-click={
             JS.toggle_attribute({"aria-expanded", "true", "false"})
             |> then(fn js ->
               Enum.reduce(Enum.to_list(0..(length(@items) - 1)) -- [index], js, fn item_index, js ->
                 js
-                |> JS.set_attribute({"aria-expanded", "false"}, to: "#accordion-trigger-#{@random_id}-#{item_index}")
-                |> JS.hide(to: "#accordion-#{@random_id}-#{item_index}", transition: "fade-out-scale")
-                |> JS.remove_class("rotate-180", to: "#accordion-chevron-#{@random_id}-#{item_index}")
+                |> JS.set_attribute({"aria-expanded", "false"},
+                  to: "#accordion-trigger-#{@id}-#{item_index}"
+                )
+                |> JS.hide(to: "#accordion-#{@id}-#{item_index}", transition: "fade-out-scale")
+                |> JS.remove_class("rotate-180", to: "#accordion-chevron-#{@id}-#{item_index}")
               end)
             end)
-            |> JS.focus(to: "#accordion-#{@random_id}-#{index}")
-            |> JS.toggle(to: "#accordion-#{@random_id}-#{index}", in: "fade-in-scale", out: "fade-out-scale", display: "grid")
-            |> JS.toggle_class("rotate-180", to: "#accordion-chevron-#{@random_id}-#{index}")
+            |> JS.focus(to: "#accordion-#{@id}-#{index}")
+            |> JS.toggle(
+              to: "#accordion-#{@id}-#{index}",
+              in: "fade-in-scale",
+              out: "fade-out-scale",
+              display: "grid"
+            )
+            |> JS.toggle_class("rotate-180", to: "#accordion-chevron-#{@id}-#{index}")
           }
         >
           <span class="flex h-10 w-10 items-center justify-center text-violet-600 group-disabled:text-slate-300 md:h-12 md:w-12">
@@ -95,7 +105,7 @@ defmodule StationUI.HTML.Accordion do
             class="flex justify-center items-center ml-auto [&_path]:transition-transform h-6 w-6 sm:h-[34px] sm:w-[34px] md:h-10 md:w-10"
           >
             <svg
-              id={"accordion-chevron-#{@random_id}-#{index}"}
+              id={"accordion-chevron-#{@id}-#{index}"}
               xmlns="http://www.w3.org/2000/svg"
               width="38"
               height="38"
@@ -113,7 +123,14 @@ defmodule StationUI.HTML.Accordion do
         </button>
 
         <% #  Accordion Content %>
-        <div id={"accordion-#{@random_id}-#{index}"} class={["grid px-3 pt-1 hidden transition-grid-rows md:px-4", @content_size_class]} role="region">
+        <div
+          id={"accordion-#{@id}-#{index}"}
+          class={[
+            "grid px-3 pt-1 hidden transition-grid-rows md:px-4",
+            content[:class] || content_default_classes()
+          ]}
+          role="region"
+        >
           <div class="overflow-hidden">
             <%= render_slot(content) %>
           </div>
