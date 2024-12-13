@@ -98,7 +98,7 @@ defmodule StationUI.HTML.Accordion do
             <.icon name="hero-folder-solid" aria-hidden="true" class="h-8 w-8 md:h-10 md:w-10" />
           </span>
 
-          <span class="text-xl lg:text-2xl"><%= render_slot(header) %></span>
+          <span><%= render_slot(header) %></span>
 
           <span
             aria-hidden="true"
