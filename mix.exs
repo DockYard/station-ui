@@ -38,7 +38,7 @@ defmodule StationUI.MixProject do
     [
       {:gettext, "~> 0.20"},
       {:phoenix, "~> 1.7.11"},
-      {:phoenix_live_view, "~> 0.20.7"},
+      {:phoenix_live_view, "~> 1.0"},
       {:credo, "~> 1.7.10", only: [:dev, :test], runtime: false},
       {:tailwind_formatter, "~> 0.3.5", only: [:dev, :test], runtime: false}
     ]
