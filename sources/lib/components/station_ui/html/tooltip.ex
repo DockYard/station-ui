@@ -18,7 +18,7 @@ defmodule StationUI.HTML.Tooltip do
     <div class={direction_classes(@direction)} id={@id} role="tooltip">
       <.icon name="hero-information-circle" class="h-6 w-6 text-blue-100" />
       <span class="z-10 text-base font-medium leading-6 text-white">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </span>
     </div>
     """

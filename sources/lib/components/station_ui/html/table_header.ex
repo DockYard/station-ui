@@ -27,7 +27,7 @@ defmodule StationUI.HTML.TableHeader do
           label[:class]
         ]}
       >
-        <%= render_slot(label) %>
+        {render_slot(label)}
       </span>
       <button
         :for={button <- @button}
@@ -36,7 +36,7 @@ defmodule StationUI.HTML.TableHeader do
           button[:class]
         ]}
       >
-        <%= render_slot(button) %>
+        {render_slot(button)}
       </button>
     </div>
     """

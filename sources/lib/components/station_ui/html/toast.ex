@@ -59,9 +59,9 @@ defmodule StationUI.HTML.Toast do
     ~H"""
     <div class={[base_classes(), @class]} role="status">
       <p class="flex items-center gap-x-3 *:shrink-0">
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </p>
-      <%= render_slot(@secondary) %>
+      {render_slot(@secondary)}
     </div>
     """
   end

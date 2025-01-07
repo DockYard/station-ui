@@ -104,7 +104,7 @@ defmodule StationUI.HTML.Card do
     <div class={[base_classes() | List.wrap(@class)]}>
       <div class={base_inner_classes()}>
         <header :for={header <- @header}>
-          <%= render_slot(header) %>
+          {render_slot(header)}
         </header>
         <.content_card slot={@content} />
       </div>
@@ -125,7 +125,7 @@ defmodule StationUI.HTML.Card do
 
     ~H"""
     <div class={[base_content_classes() | List.wrap(@class)]}>
-      <%= render_slot(@slot) %>
+      {render_slot(@slot)}
     </div>
     """
   end
@@ -152,7 +152,7 @@ defmodule StationUI.HTML.Card do
     <div class={[base_horizontal_classes() | List.wrap(@class)]}>
       <div class={base_horizontal_inner_classes()}>
         <header :for={header <- @header}>
-          <%= render_slot(header) %>
+          {render_slot(header)}
         </header>
         <.content_card_horizontal slot={@content} />
       </div>
@@ -173,7 +173,7 @@ defmodule StationUI.HTML.Card do
 
     ~H"""
     <div class={[base_horizontal_content_classes() | List.wrap(@class)]}>
-      <%= render_slot(@slot) %>
+      {render_slot(@slot)}
     </div>
     """
   end

@@ -12,7 +12,7 @@ defmodule StationUI.HTML.NotificationBadge do
       @class,
       "font-sans group/notification-badge flex items-center justify-center rounded-full bg-rose-600 font-bold text-white hover:bg-rose-500"
     ]}>
-      <%= render_slot(@inner_block) || default_content(assigns) %>
+      {render_slot(@inner_block) || default_content(assigns)}
     </div>
     """
   end
@@ -29,7 +29,7 @@ defmodule StationUI.HTML.NotificationBadge do
 
   defp default_content(assigns) do
     ~H"""
-    <span class="pointer-events-none"><%= @count %></span>
+    <span class="pointer-events-none">{@count}</span>
     """
   end
 end

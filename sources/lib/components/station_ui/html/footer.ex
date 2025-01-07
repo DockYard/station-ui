@@ -103,18 +103,18 @@ defmodule StationUI.HTML.Footer do
           <ul class="flex flex-wrap items-center gap-x-12 gap-y-6">
             <%= for footer_link <- @footer_link do %>
               <li class={[footer_link_base_classes(), "#{Map.get(footer_link, :class, "text-slate-600")}"]}>
-                <%= render_slot(footer_link) %>
+                {render_slot(footer_link)}
               </li>
             <% end %>
           </ul>
         <% end %>
       </div>
       <hr class="border-[--sui-brand-primary-border] my-10 border-t-2" />
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
       <div class="flex flex-wrap items-center gap-x-4 gap-y-10">
         <div class={["grow", Enum.empty?(@social_icon) && "text-center"]}>
           <span class="text-[--sui-brand-secondary-text] text-3xl">
-            <%= @legal_text %>
+            {@legal_text}
           </span>
         </div>
         <%= if !Enum.empty?(@social_icon) do %>
@@ -122,7 +122,7 @@ defmodule StationUI.HTML.Footer do
             <%= for social_icon <- @social_icon do %>
               <li class={[social_icons_base_classes(), "#{Map.get(social_icon, :class, "text-[--sui-brand-primary-icon]")}"]}>
                 <.link href={social_icon[:url]} aria-label={social_icon[:title]} target="_blank">
-                  <%= render_slot(social_icon) %>
+                  {render_slot(social_icon)}
                 </.link>
               </li>
             <% end %>
@@ -148,19 +148,19 @@ defmodule StationUI.HTML.Footer do
           <%= for column <- @column do %>
             <div class="px-3">
               <h6 class="mb-[30px] text-[--sui-brand-secondary-text-muted] text-4xl font-bold">
-                <%= column[:heading] %>
+                {column[:heading]}
               </h6>
-              <%= render_slot(column) %>
+              {render_slot(column)}
             </div>
           <% end %>
         </div>
       </div>
       <hr class="border-[--sui-brand-primary-border] my-10 border-t-2" />
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
       <div class="flex flex-wrap items-center gap-x-4 gap-y-10">
         <div class={["grow", Enum.empty?(@social_icon) && "text-center"]}>
           <span class="text-[--sui-brand-secondary-text] text-3xl">
-            <%= @legal_text %>
+            {@legal_text}
           </span>
         </div>
         <%= if !Enum.empty?(@social_icon) do %>
@@ -168,7 +168,7 @@ defmodule StationUI.HTML.Footer do
             <%= for social_icon <- @social_icon do %>
               <li class={[social_icons_base_classes(), "#{Map.get(social_icon, :class, "text-[--sui-brand-primary-icon]")}"]}>
                 <.link href={social_icon[:url]} aria-label={social_icon[:title]} target="_blank">
-                  <%= render_slot(social_icon) %>
+                  {render_slot(social_icon)}
                 </.link>
               </li>
             <% end %>
@@ -188,7 +188,7 @@ defmodule StationUI.HTML.Footer do
     <ul class="space-y-10">
       <%= for footer_link <- @footer_link do %>
         <li class={[footer_link_base_classes(), "#{Map.get(footer_link, :class, "text-slate-600")}", "px-2.5"]}>
-          <%= render_slot(footer_link) %>
+          {render_slot(footer_link)}
         </li>
       <% end %>
     </ul>

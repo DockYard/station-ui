@@ -45,7 +45,7 @@ defmodule StationUI.HTML.Tag do
       {@rest}
     >
       <span class={["text-base leading-6", "font-sans font-bold"]}>
-        <%= render_slot(@inner_block) %>
+        {render_slot(@inner_block)}
       </span>
       <button
         :if={@on_delete}

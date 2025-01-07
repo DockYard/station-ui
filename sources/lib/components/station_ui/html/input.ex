@@ -212,11 +212,11 @@ defmodule StationUI.HTML.Input do
           data-errors={to_string(@errors != [])}
           {@rest}
         />
-        <span class="cursor-pointer before:absolute before:inset-0"><%= render_slot(label) %></span>
+        <span class="cursor-pointer before:absolute before:inset-0">{render_slot(label)}</span>
       </label>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -295,11 +295,11 @@ defmodule StationUI.HTML.Input do
           data-errors={to_string(@errors != [])}
           {@rest}
         />
-        <span class="cursor-pointer before:absolute before:inset-0"><%= render_slot(label) %></span>
+        <span class="cursor-pointer before:absolute before:inset-0">{render_slot(label)}</span>
       </label>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -368,7 +368,7 @@ defmodule StationUI.HTML.Input do
     ~H"""
     <.input_wrapper disabled={@disabled} error_class={@error_class} errors={@errors} name={@name}>
       <.label :for={label <- @label} class={label[:class] || label_default_classes()} for={@id}>
-        <%= render_slot(label) %>
+        {render_slot(label)}
       </.label>
 
       <div class="relative">
@@ -386,8 +386,8 @@ defmodule StationUI.HTML.Input do
           data-errors={to_string(@errors != [])}
           {@rest}
         >
-          <option :if={@prompt} value=""><%= @prompt %></option>
-          <%= Form.options_for_select(@options, @value) %>
+          <option :if={@prompt} value="">{@prompt}</option>
+          {Form.options_for_select(@options, @value)}
         </select>
 
         <.icon
@@ -400,7 +400,7 @@ defmodule StationUI.HTML.Input do
       </div>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -527,7 +527,7 @@ defmodule StationUI.HTML.Input do
     >
       <%= for label <- @label do %>
         <.label id={label[:id]} class={[label[:class] || label_default_classes(), "font-semibold"]} for={@id}>
-          <%= render_slot(label) %>
+          {render_slot(label)}
         </.label>
 
         <div class="relative" phx-click={if !@disabled, do: JS.exec("data-toggle-select", to: "##{@wrapper_id}")}>
@@ -590,7 +590,7 @@ defmodule StationUI.HTML.Input do
                   |> JS.exec("data-close-select", to: "##{@wrapper_id}")
                 }
               >
-                <%= option[:value] %>
+                {option[:value]}
               </button>
             </li>
           </ul>
@@ -598,7 +598,7 @@ defmodule StationUI.HTML.Input do
       <% end %>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -685,11 +685,11 @@ defmodule StationUI.HTML.Input do
           data-errors={to_string(@errors != [])}
           {@rest}
         />
-        <%= render_slot(label) %>
+        {render_slot(label)}
       </label>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -765,7 +765,7 @@ defmodule StationUI.HTML.Input do
     ~H"""
     <.input_wrapper disabled={@disabled} error_class={@error_class} errors={@errors} name={@name}>
       <.label :for={label <- @label} class={label[:class] || label_default_classes()} for={@id}>
-        <%= render_slot(label) %>
+        {render_slot(label)}
       </.label>
 
       <textarea
@@ -783,7 +783,7 @@ defmodule StationUI.HTML.Input do
       ><%= Form.normalize_value("textarea", @value) %></textarea>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -930,11 +930,11 @@ defmodule StationUI.HTML.Input do
     ~H"""
     <.input_wrapper disabled={@disabled} error_class={@error_class} errors={@errors} name={@name}>
       <.label :for={label <- @label} class={label[:class] || label_default_classes()} for={@id}>
-        <%= render_slot(label) %>
+        {render_slot(label)}
       </.label>
 
       <div class="relative">
-        <%= render_slot(@prefix) %>
+        {render_slot(@prefix)}
 
         <input
           id={@id}
@@ -952,11 +952,11 @@ defmodule StationUI.HTML.Input do
           {@rest}
         />
 
-        <%= render_slot(@suffix) %>
+        {render_slot(@suffix)}
       </div>
 
       <:caption :for={caption <- @caption} class={caption[:class]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </:caption>
     </.input_wrapper>
     """
@@ -971,7 +971,7 @@ defmodule StationUI.HTML.Input do
   def label(assigns) do
     ~H"""
     <label for={@for} id={@id} class={[@class || label_default_classes(), "font-semibold"]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </label>
     """
   end
@@ -983,7 +983,7 @@ defmodule StationUI.HTML.Input do
   def error(assigns) do
     ~H"""
     <p class={[@class, "font-sans text-[--sui-form-text-error] font-medium phx-no-feedback:hidden"]}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </p>
     """
   end
@@ -1011,14 +1011,14 @@ defmodule StationUI.HTML.Input do
       ]}
       {@rest}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
 
       <p :for={caption <- @caption} class={[caption[:class] || caption_default_classes(), "font-sans font-medium"]}>
-        <%= render_slot(caption) %>
+        {render_slot(caption)}
       </p>
 
       <.error :for={msg <- @errors} class={@error_class}>
-        <%= msg %>
+        {msg}
       </.error>
     </div>
     """

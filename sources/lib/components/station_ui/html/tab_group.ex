@@ -97,7 +97,7 @@ defmodule StationUI.HTML.TabGroup do
             phx-click={show_tab(@id, tab.index) |> JS.exec("data-tab-select")}
             data-tab-select={if is_function(@on_select, 1), do: @on_select.(tab.index), else: %JS{}}
           >
-            <%= render_slot(tab) %>
+            {render_slot(tab)}
           </button>
 
           <div :if={tab_divider} class={[tab_divider[:class] || tab_divider_default_classes(), tab_divider_base_classes()]}></div>
@@ -112,7 +112,7 @@ defmodule StationUI.HTML.TabGroup do
         aria-labelledby={tab_id(@id, tab_panel.index)}
         data-visible={@default_index == tab_panel.index}
       >
-        <%= render_slot(tab_panel) %>
+        {render_slot(tab_panel)}
       </div>
     </div>
     """

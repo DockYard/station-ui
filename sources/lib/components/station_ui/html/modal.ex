@@ -60,10 +60,10 @@ defmodule StationUI.HTML.Modal do
           <header class={["flex items-start gap-x-2", header_size_classes(@size)]}>
             <div class="grow text-center">
               <h1 :if={@title} id={"#{@id}-title"} class={["font-bold", title_size_classes(@size)]}>
-                <%= render_slot(@title) %>
+                {render_slot(@title)}
               </h1>
               <h2 :if={@subtitle} class={["font-medium", subtitle_size_classes(@size)]}>
-                <%= render_slot(@subtitle) %>
+                {render_slot(@subtitle)}
               </h2>
             </div>
 
@@ -73,7 +73,7 @@ defmodule StationUI.HTML.Modal do
           </header>
 
           <div id={"#{@id}-content"} class={["w-full overflow-y-auto", content_size_classes(@size)]}>
-            <%= render_slot(@inner_block) %>
+            {render_slot(@inner_block)}
           </div>
 
           <div
@@ -84,7 +84,7 @@ defmodule StationUI.HTML.Modal do
               footer_variant_classes(footer.variant)
             ]}
           >
-            <%= render_slot(@footer) %>
+            {render_slot(@footer)}
           </div>
         </section>
       </.focus_wrap>

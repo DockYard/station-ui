@@ -46,7 +46,7 @@ defmodule StationUI.HTML.Navbar do
         @class
       ]}
     >
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </nav>
     """
   end
@@ -64,7 +64,7 @@ defmodule StationUI.HTML.Navbar do
         <ul class="flex shrink-0 items-center gap-x-1 sm:gap-x-2 md:gap-x-3 xl:gap-x-4 leading-none min-[1800px]:gap-x-2 [&>*]:hidden [&>*:first-child]:block [&>*:nth-child(2)]:block [&>*:nth-child(3)]:block [&>*:nth-child(4)]:block md:[&>*]:block">
           <%= for item <- @item do %>
             <li>
-              <%= render_slot(item) %>
+              {render_slot(item)}
             </li>
           <% end %>
         </ul>
@@ -84,7 +84,7 @@ defmodule StationUI.HTML.Navbar do
       <ul class="hidden shrink-0 gap-x-2 min-[1800px]:gap-x-2 md:flex md:items-center xl:gap-x-1 2xl:gap-x-1.5">
         <%= for item <- @item do %>
           <li>
-            <%= render_slot(item) %>
+            {render_slot(item)}
           </li>
         <% end %>
       </ul>
