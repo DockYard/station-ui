@@ -98,7 +98,7 @@ defmodule StationUI.HTML.Accordion do
             <.icon name="hero-folder-solid" aria-hidden="true" class="h-8 w-8 md:h-10 md:w-10" />
           </span>
 
-          <span><%= render_slot(header) %></span>
+          <span>{render_slot(header)}</span>
 
           <span
             aria-hidden="true"
@@ -132,7 +132,7 @@ defmodule StationUI.HTML.Accordion do
           role="region"
         >
           <div class="overflow-hidden">
-            <%= render_slot(content) %>
+            {render_slot(content)}
           </div>
         </div>
       </div>

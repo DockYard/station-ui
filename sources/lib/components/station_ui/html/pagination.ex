@@ -164,7 +164,7 @@ defmodule StationUI.HTML.Pagination do
           aria-disabled={@current_page == 1 && "true"}
           tabindex={@current_page == 1 && "-1"}
         >
-          <%= if first_slot.inner_block, do: render_slot(first_slot), else: "First" %>
+          {if first_slot.inner_block, do: render_slot(first_slot), else: "First"}
         </.link>
 
         <.link
@@ -174,7 +174,7 @@ defmodule StationUI.HTML.Pagination do
           aria-disabled={@current_page == 1 && "true"}
           tabindex={@current_page == 1 && "-1"}
         >
-          <%= if previous_slot.inner_block, do: render_slot(previous_slot), else: "Prev" %>
+          {if previous_slot.inner_block, do: render_slot(previous_slot), else: "Prev"}
         </.link>
 
         <%= for page_link_slot <- @page_links, page <- @range_start..@range_end//1 do %>
@@ -189,7 +189,7 @@ defmodule StationUI.HTML.Pagination do
               </button>
             <% true -> %>
               <.link patch={link_to_page(@params, page, @link_fn)} class={item_classes(page_link_slot)} aria-current={@current_page == page && "page"}>
-                <%= if page_link_slot.inner_block, do: render_slot(page_link_slot, page), else: to_string(page) %>
+                {if page_link_slot.inner_block, do: render_slot(page_link_slot, page), else: to_string(page)}
               </.link>
           <% end %>
         <% end %>
@@ -201,7 +201,7 @@ defmodule StationUI.HTML.Pagination do
           aria-disabled={@current_page == @total_page_count && "true"}
           tabindex={@current_page == @total_page_count && "-1"}
         >
-          <%= if next_slot.inner_block, do: render_slot(next_slot), else: "Next" %>
+          {if next_slot.inner_block, do: render_slot(next_slot), else: "Next"}
         </.link>
 
         <.link
@@ -211,7 +211,7 @@ defmodule StationUI.HTML.Pagination do
           aria-disabled={@current_page == @total_page_count && "true"}
           tabindex={@current_page == @total_page_count && "-1"}
         >
-          <%= if last_slot.inner_block, do: render_slot(last_slot), else: "Last" %>
+          {if last_slot.inner_block, do: render_slot(last_slot), else: "Last"}
         </.link>
       </nav>
       """

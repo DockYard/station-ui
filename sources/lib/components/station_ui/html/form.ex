@@ -41,7 +41,7 @@ defmodule StationUI.HTML.Form do
   def input(%{type: "checkbox"} = assigns) do
     ~H"""
     <Input.checkbox {Map.drop(assigns, [:field, :label, :multiple, :options, :prompt, :type])}>
-      <:label :if={@label}><%= @label %></:label>
+      <:label :if={@label}>{@label}</:label>
     </Input.checkbox>
     """
   end
@@ -49,7 +49,7 @@ defmodule StationUI.HTML.Form do
   def input(%{type: "select"} = assigns) do
     ~H"""
     <Input.simple_select {Map.drop(assigns, [:checked, :field, :label, :type])}>
-      <:label :if={@label}><%= @label %></:label>
+      <:label :if={@label}>{@label}</:label>
     </Input.simple_select>
     """
   end
@@ -57,7 +57,7 @@ defmodule StationUI.HTML.Form do
   def input(%{type: "textarea"} = assigns) do
     ~H"""
     <Input.textarea {Map.drop(assigns, [:checked, :field, :label, :multiple, :options, :prompt, :type])}>
-      <:label :if={@label}><%= @label %></:label>
+      <:label :if={@label}>{@label}</:label>
     </Input.textarea>
     """
   end
@@ -65,7 +65,7 @@ defmodule StationUI.HTML.Form do
   def input(assigns) do
     ~H"""
     <Input.generic_input {Map.drop(assigns, [:checked, :field, :label, :multiple, :options, :prompt])}>
-      <:label :if={@label}><%= @label %></:label>
+      <:label :if={@label}>{@label}</:label>
     </Input.generic_input>
     """
   end

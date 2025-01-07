@@ -50,12 +50,12 @@ defmodule StationUI.HTML.Avatar do
     ~H"""
     <div class={[stack_base_classes() | List.wrap(@class)]}>
       <.avatar_link :if={@total_count > @display_max} to={@overflow_link} variant="initials" class="h-[42px] w-[42px] border-[--sui-brand-primary-border]">
-        <:initials count={true}>+<%= @total_count - @display_max %></:initials>
+        <:initials count={true}>+{@total_count - @display_max}</:initials>
       </.avatar_link>
 
       <div>
         <%= for {avatar, i} <- Enum.with_index(@avatar), i < @display_max do %>
-          <%= render_slot(avatar) %>
+          {render_slot(avatar)}
         <% end %>
       </div>
     </div>
@@ -157,12 +157,12 @@ defmodule StationUI.HTML.Avatar do
     <figure class={[figure_base_classes(), @class]}>
       <figcaption>
         <span aria-hidden="true">
-          <%= render_slot(@initials) || initials_from_name(@name || "") %>
+          {render_slot(@initials) || initials_from_name(@name || "")}
         </span>
         <span :for={initials <- @initials} :if={initials[:count]} class="sr-only">
-          <%= render_slot(@initials) %>
+          {render_slot(@initials)}
         </span>
-        <span :if={@name} class="sr-only"><%= @name %></span>
+        <span :if={@name} class="sr-only">{@name}</span>
       </figcaption>
       <.avatar_status_badge :if={assigns[:status]} status={@status} />
     </figure>
@@ -172,7 +172,7 @@ defmodule StationUI.HTML.Avatar do
   def avatar(%{variant: "placeholder"} = assigns) do
     ~H"""
     <figure class={[figure_base_classes(), @class]}>
-      <%= render_slot(@placeholder) || default_avatar_placeholder_icon(assigns) %>
+      {render_slot(@placeholder) || default_avatar_placeholder_icon(assigns)}
       <.avatar_status_badge :if={assigns[:status]} status={@status} />
     </figure>
     """
@@ -199,7 +199,7 @@ defmodule StationUI.HTML.Avatar do
       xmlns="http://www.w3.org/2000/svg"
       aria-label={@name || "Avatar Image"}
     >
-      <title :if={@name}><%= @name %></title>
+      <title :if={@name}>{@name}</title>
       <circle class="fill-gray-300" cx="16" cy="16" r="16" />
       <path class="fill-gray-400" opacity="0.6" d="M16 0C7.16344 0 0 7.16344 0 16C4 16 6 14 8 12C11.2 20 30 20 32 16C32 7.16344 24.8366 0 16 0Z" />
       <path

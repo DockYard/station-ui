@@ -53,13 +53,13 @@ defmodule StationUI.HTML.Banner do
     <div id={@id} class={[base_classes(), @class]} role="status">
       <div class="flex items-center justify-between">
         <div class="flex items-center">
-          <%= render_slot(@inner_block) %>
+          {render_slot(@inner_block)}
         </div>
         <.button class="sui-secondary min-h-11 border-0 bg-white" aria-label="Dismiss" phx-click={hide_banner(@on_cancel, @id)}>
           <.icon name="hero-x-mark" />
         </.button>
       </div>
-      <p class="pb-2 empty:hidden"><%= render_slot(@secondary) %></p>
+      <p class="pb-2 empty:hidden">{render_slot(@secondary)}</p>
     </div>
     """
   end

@@ -85,7 +85,7 @@ defmodule StationUI.HTML.Toolbar do
         <li :for={item <- @toolbar_item} class={["#{Map.get(item, :class, "")}"]}>
           <.button class="sui-secondary min-h-11 flex-col border-0 bg-transparent [&]:px-3.5 [&]:py-2">
             <.icon name={item[:icon_name]} />
-            <%= item[:text] %>
+            {item[:text]}
           </.button>
         </li>
       </ul>
@@ -118,7 +118,7 @@ defmodule StationUI.HTML.Toolbar do
         <li :for={item <- @toolbar_item} class={["#{Map.get(item, :class, "")}"]}>
           <.button class="sui-secondary min-h-11 flex-col border-0 bg-transparent">
             <.icon name={item[:icon_name]} />
-            <span class="sr-only"><%= item[:text] %></span>
+            <span class="sr-only">{item[:text]}</span>
           </.button>
         </li>
       </ul>

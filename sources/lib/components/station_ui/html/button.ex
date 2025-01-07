@@ -38,7 +38,7 @@ defmodule StationUI.HTML.Button do
   def button(assigns) do
     ~H"""
     <button class={[@class, base_classes()]} {@rest}>
-      <%= render_slot(@inner_block) %>
+      {render_slot(@inner_block)}
     </button>
     """
   end
