@@ -67,7 +67,7 @@ defmodule StationUI.HTML.Modal do
               </h2>
             </div>
 
-            <.button type="button" class="sui-secondary w-[42px] h-[42px] rounded-full" aria-label="Close" phx-click={@on_cancel}>
+            <.button type="button" class="sui-secondary w-[42px] h-[42px] rounded-full" aria-label="Close" phx-click={hide_modal(@on_cancel, @id)}>
               <.icon name="hero-x-mark" class="h-6 w-6 shrink-0" />
             </.button>
           </header>
