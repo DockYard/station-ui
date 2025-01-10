@@ -46,7 +46,7 @@ defmodule StationUI.HTML.Card do
 
   ### Horizontal Card
 
-  <.card_horizontal>
+  <.card direction="horizontal">
     <:header>
       <img
         class="h-full w-[260px] object-cover"
@@ -79,7 +79,7 @@ defmodule StationUI.HTML.Card do
         </.button>
       </div>
     </:content>
-  </.card_horizontal>
+  </.card>
   """
 
   @base_classes "@container min-w-[200px] w-full h-full"
@@ -91,12 +91,35 @@ defmodule StationUI.HTML.Card do
   @base_content_classes "grid gap-0.5 @[350px]:gap-1 @[425px]:gap-2 p-2 @[425px]:px-4 @[625px]:px-6 @[625px]:py-3 @[850px]:px-8 @[850px]:py-4"
   defp base_content_classes, do: @base_content_classes
 
+  @base_horizontal_classes "@container min-w-[200px] w-full h-full"
+  defp base_horizontal_classes, do: @base_horizontal_classes
+
+  @base_horizontal_inner_classes "overflow-hidden drop-shadow-md @[425px]:drop-shadow-lg @[625px]:drop-shadow-xl @[850px]:drop-shadow-2xl rounded-xl w-full flex"
+  defp base_horizontal_inner_classes, do: @base_horizontal_inner_classes
+
+  @base_horizontal_content_classes "flex w-full gap-1 py-2 pl-2 @[425px]:py-4 @[425px]:pl-4 @[625px]:py-6 @[625px]:pl-6 @[850px]:py-8 @[850px]:pl-8"
+  defp base_horizontal_content_classes, do: @base_horizontal_content_classes
+
   attr :class, :any, default: ""
+  attr :direction, :string
 
   slot :header
 
   slot :content, required: true do
     attr :class, :string
+  end
+
+  def card(%{direction: "horizontal"} = assigns) do
+    ~H"""
+    <div class={[base_horizontal_classes() | List.wrap(@class)]}>
+      <div class={base_horizontal_inner_classes()}>
+        <header :for={header <- @header}>
+          {render_slot(header)}
+        </header>
+        <.content_card slot={@content} direction="horizontal" />
+      </div>
+    </div>
+    """
   end
 
   def card(assigns) do
@@ -113,6 +136,7 @@ defmodule StationUI.HTML.Card do
   end
 
   attr :slot, :any, required: true
+  attr :direction, :string, default: ""
 
   defp content_card(assigns) do
     class =
@@ -123,56 +147,15 @@ defmodule StationUI.HTML.Card do
 
     assigns = assign(assigns, :class, class)
 
-    ~H"""
-    <div class={[base_content_classes() | List.wrap(@class)]}>
-      {render_slot(@slot)}
-    </div>
-    """
-  end
-
-  @base_horizontal_classes "@container min-w-[200px] w-full h-full"
-  defp base_horizontal_classes, do: @base_horizontal_classes
-
-  @base_horizontal_inner_classes "overflow-hidden drop-shadow-md @[425px]:drop-shadow-lg @[625px]:drop-shadow-xl @[850px]:drop-shadow-2xl rounded-xl w-full flex"
-  defp base_horizontal_inner_classes, do: @base_horizontal_inner_classes
-
-  @base_horizontal_content_classes "flex w-full gap-1 py-2 pl-2 @[425px]:py-4 @[425px]:pl-4 @[625px]:py-6 @[625px]:pl-6 @[850px]:py-8 @[850px]:pl-8"
-  defp base_horizontal_content_classes, do: @base_horizontal_content_classes
-
-  attr :class, :any, default: ""
-  slot :inner_block, required: true
-  slot :header
-
-  slot :content do
-    attr :class, :string
-  end
-
-  def card_horizontal(assigns) do
-    ~H"""
-    <div class={[base_horizontal_classes() | List.wrap(@class)]}>
-      <div class={base_horizontal_inner_classes()}>
-        <header :for={header <- @header}>
-          {render_slot(header)}
-        </header>
-        <.content_card_horizontal slot={@content} />
-      </div>
-    </div>
-    """
-  end
-
-  attr :slot, :any, required: true
-
-  defp content_card_horizontal(assigns) do
-    class =
-      case assigns.slot do
-        [%{class: class} | _] -> class
-        _ -> "bg-white"
+    content_class =
+      if assigns.direction == "horizontal" do
+        [base_horizontal_content_classes() | List.wrap(class)]
+      else
+        [base_content_classes() | List.wrap(class)]
       end
 
-    assigns = assign(assigns, :class, class)
-
     ~H"""
-    <div class={[base_horizontal_content_classes() | List.wrap(@class)]}>
+    <div class={content_class}>
       {render_slot(@slot)}
     </div>
     """
