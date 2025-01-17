@@ -148,10 +148,9 @@ defmodule StationUI.HTML.Card do
     assigns = assign(assigns, :class, class)
 
     content_class =
-      if assigns.direction == "horizontal" do
-        [base_horizontal_content_classes() | List.wrap(class)]
-      else
-        [base_content_classes() | List.wrap(class)]
+      case assigns do
+        %{direction: "horizontal"} -> [base_horizontal_content_classes() | List.wrap(class)]
+        _ -> [base_content_classes() | List.wrap(class)]
       end
 
     ~H"""
