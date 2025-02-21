@@ -24,7 +24,8 @@ defmodule StationUI.HTML do
         Toolbar,
         Tooltip,
         TableHeader,
-        TableCell
+        TableCell,
+        Uploader
       }
     end
   end
