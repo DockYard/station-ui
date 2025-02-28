@@ -76,7 +76,9 @@ defmodule StationUI.HTML.Uploader do
 
   attr :class, :string, default: ""
 
-  slot :support, doc: "Explanatory content directly below the uploader."
+  slot :support, doc: "Explanatory paragraph(s) directly below the uploader." do
+    attr :class, :string
+  end
 
   def uploader(assigns) do
     ~H"""
@@ -130,7 +132,7 @@ defmodule StationUI.HTML.Uploader do
             </section>
           </div>
 
-          <p :for={support <- @support}>{render_slot(support)}</p>
+          <p :for={support <- @support} class={support[:class]}>{render_slot(support)}</p>
 
           <div class="mt-4">
             <article :for={entry <- @uploads.files.entries} class="upload-entry">
@@ -156,18 +158,22 @@ defmodule StationUI.HTML.Uploader do
             <p :for={err <- upload_errors(@uploads.files)} class="alert alert-danger mt-4 text-red-500">
               {error_to_string(err, assigns)}
             </p>
-            <button
-              :if={Enum.any?(@uploads.files.entries)}
-              class="sui-primary [:where(&)]:rounded-lg [:where(&)]:text-base py-[7px] text-[--sui-brand-primary] inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap px-2 font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 lg:gap-x-2 relative hover:text-blue-500 hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:text-blue-500 focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4"
-              type="submit"
+            <div
+              :if={Enum.any?(@uploads.files.entries) && Enum.empty?(upload_errors(@uploads.files))}
+              class="mt-4 mb-16 flex h-full flex-col flex-wrap items-center justify-center gap-1.5"
             >
-              Upload
-            </button>
+              <button
+                class="sui-primary [:where(&)]:rounded-lg [:where(&)]:text-base py-[7px] text-[--sui-brand-primary] inline-flex items-center justify-center gap-x-1.5 whitespace-nowrap px-2 font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 lg:gap-x-2 relative hover:underline hover:decoration-2 hover:underline-offset-4 focus-visible:underline focus-visible:decoration-2 focus-visible:underline-offset-4 bg-indigo-700 text-white"
+                type="submit"
+              >
+                Upload
+              </button>
+            </div>
           </div>
         </form>
 
         <div :if={Enum.any?(@uploaded_files)}>
-          <h3>Uploaded files</h3>
+          <h3 class="font-semibold">Uploaded files</h3>
           <ul>
             <li :for={{filename, size} <- @uploaded_files}>
               <.icon name="hero-check-circle-solid" class="text-[--sui-brand-primary-success] mr-2 h-4 w-4" />
